@@ -7,6 +7,7 @@ I am trying to train a GAN (Generative Adverserial Network) to generate images s
 
 This project is on-going.
 I have uploaded the augmented dataset of Pokémon sprites for reference.
+I have also uploaded a .pth file of the recent checkpoint from GAN training. 
 
 Following is one of the very early generator outputs-
 
