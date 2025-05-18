@@ -12,11 +12,12 @@ Augmented Pokémon Sprites Images - [Google Drive Link](https://drive.google.com
 
 .pth file from recent GAN Training - [Google Drive Link](https://drive.google.com/file/d/1vS29NHQScIsEfqyh0nSqDD5ZGjhU9qkZ/)
 
-Following is one of the very early generator outputs-
+GAN is currently in very early stages of training and regular updates and improvements are being made to GAN model architecture according to the generator outputs.
 
-
-![image](https://github.com/user-attachments/assets/7d1d5fa7-a361-4146-bc04-268978360170)
-
+## GAN Architecture
+### Initial Model
+Conv2d layers for discriminator with ReLU and BatchNorm2d. \\
+ConvTranspose2d layers for generator with ReLU and BatchNorm2d.
 
 
 Progress will gradually be updated.
