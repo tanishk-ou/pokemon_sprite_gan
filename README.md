@@ -16,7 +16,7 @@ GAN is currently in very early stages of training and regular updates and improv
 
 ## GAN Architecture
 ### Initial Model
-Conv2d layers for discriminator with ReLU and BatchNorm2d. \\
+Conv2d layers for discriminator with ReLU and BatchNorm2d. <br>
 ConvTranspose2d layers for generator with ReLU and BatchNorm2d.
 
 
