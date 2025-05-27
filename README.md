@@ -50,7 +50,7 @@ The GAN is still focusing on backgrounds since the randomness of backgrounds is 
 Added a Mini-Batch Discrimination layer in Critic. Added a mask which forces critic to focus more near the centre of the images in every residual block of critic.<br>
 Since the critic was focusing too much to backgrounds and all Pokémon are centered in the image, a mask to prioritise centre part of the image should help critic focus on the foreground.<br>
 GAN will now be trained on RGBA images and to force the models to not focus on alpha, the following changes have been made:-<br>
-Generator and Critic losses are changed as well.<br>
+Generator and Critic losses are modified.<br>
 
 ```python
 fg_mask = alpha
