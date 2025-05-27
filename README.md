@@ -67,7 +67,6 @@ here, both losses are essentially the same as the original WGAN-GP losses.<br>
 the changes in the losses are-<br>
 1. `fake_loss` and `real_loss` are combinations of the original critic scores and the alpha of original images. This reduces gradients of the background.
 2. `background_supression_loss` forces generator to focus more on foreground and suppresses all pixel values in background.
-<br>
 This should help the GAN to finally focus on the actual Pokémon.
-<br><br><br>
+<br><br><br><br>
 Progress will gradually be updated.
