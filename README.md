@@ -1,9 +1,9 @@
-# Pokemon Sprites GAN
-Training a GAN model to generate pokemon sprites
+# Pokémon Sprites Generator (GAN)
+A Generative Adversarial Network trained to create game-style Pokémon sprites from scratch.
 
 In Pokémon games, "sprites" are 2D images used to represent Pokémon and other characters in the game. They are the visual representation of these elements on the screen, particularly in older generations of Pokémon games.
 
-I am going to train a GAN (Generative Adverserial Network) to generate images similar to the official Pokémon sprites used in Pokémon games.
+I am going to train a GAN (Generative Adversarial Network) to generate images similar to the official Pokémon sprites used in Pokémon games.
 
 This project is on-going.
 
@@ -47,7 +47,7 @@ Also, started using gradient accumulation, so that batches of 128 size are effec
 
 ### Update 5
 The GAN is still focusing on backgrounds since the randomness of backgrounds is much easier to capture than the randomness of different Pokémons. <br>
-Added a Mini-Batch Discrimination layer in Critic. Added a mask which forces critic to focus more near the centre of the images in every residual block of critic.<br>
+Added a Mini-Batch Discrimination layer in Critic to help it detect mode collapse by analysing relationships between samples in a batch. Added a mask which forces critic to focus more near the centre of the images in every residual block of critic.<br>
 Since the critic was focusing too much to backgrounds and all Pokémon are centered in the image, a mask to prioritise centre part of the image should help critic focus on the foreground.<br>
 GAN will now be trained on RGBA images and to force the models to not focus on alpha, the following changes have been made:-<br>
 Generator and Critic losses are modified.<br>
@@ -56,8 +56,12 @@ Generator and Critic losses are modified.<br>
 fg_mask = alpha
 bg_mask = 1 - alpha
 
-real_loss = fg_mask * critic_real_score + bg_mask * bg_weight * critic_real_score
-fake_loss = fg_mask * critic_fake_score + bg_mask * bg_weight * critic_fake_score
+critic_real_score = critic_real_score.unsqueeze(-1).unsqueeze(-1)
+critic_fake_score = critic_fake_score.unsqueeze(-1).unsqueeze(-1)
+
+
+real_loss = torch.mean((fg_mask + bg_mask * bg_weight) * critic_real_score)
+fake_loss = torch.mean((fg_mask + bg_mask * bg_weight) * critic_fake_score)
 
 critic_loss = fake_loss - real_loss + c_lambda * gp
 
@@ -67,6 +71,6 @@ here, both losses are essentially the same as the original WGAN-GP losses.<br>
 the changes in the losses are-<br>
 1. `fake_loss` and `real_loss` are combinations of the original critic scores and the alpha of original images. This reduces gradients of the background.
 2. `background_supression_loss` forces generator to focus more on foreground and suppresses all pixel values in background.
-This should help the GAN to finally focus on the actual Pokémon.
+This encourages the GAN to produce realistic Pokémon rather than just plausible backgrounds.
 <br><br><br><br>
 Progress will gradually be updated.
